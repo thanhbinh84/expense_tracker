@@ -37,7 +37,7 @@ class Utils {
     errorToast(e.toString());
   }
 
-  static final DateFormat dateTimeFormat = DateFormat('yyyy-MM-ddTHH:mm:ss.SSS');
+  static final DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm');
 
   DateTime? convertStringToDate(String dateString) {
     try {

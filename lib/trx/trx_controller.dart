@@ -8,13 +8,16 @@ class TrxController extends BaseController {
   final trxRepository = Get.find<TrxRepository>();
   Trx trx = Trx(dateTime: DateTime.now());
 
-  updateTrx({String? amount, String? desc}) {
+  updateTrx({String? amount, String? desc, DateTime? dateTime}) {
 
     if (amount != null) {
       trx.amount = double.tryParse(amount) ?? 0;
     }
     if (desc != null) {
       trx.desc = desc;
+    }
+    if (dateTime != null) {
+      trx.dateTime = dateTime;
     }
   }
 
