@@ -1,11 +1,12 @@
 import 'package:expense_tracker/core/controller/base_controller.dart';
-import 'package:expense_tracker/core/repository/workout_repository.dart';
+import 'package:expense_tracker/core/model/trx.dart';
+import 'package:expense_tracker/core/repository/trx_repository.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends BaseController {
   static DashboardController get to => Get.find();
   final trxRepository = Get.find<TrxRepository>();
-  final trxList = [].obs;
+  final trxList = <Trx>[].obs;
 
   @override
   onInit() {
@@ -16,7 +17,7 @@ class DashboardController extends BaseController {
   _getTrxList() async {
     try {
       loading();
-      trxList.value = await trxRepository.getTrxList();
+      trxList.bindStream(trxRepository.getTrxList());
       trxList.refresh();
       success();
     } catch (e) {

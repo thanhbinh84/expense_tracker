@@ -31,6 +31,7 @@ class Utils {
 
   static handleError(dynamic e, {StackTrace? s}) async {
     if (kDebugMode) {
+      print(e.toString());
       print(s);
     }
     errorToast(e.toString());

@@ -1,7 +1,7 @@
 import 'package:expense_tracker/core/widget/base_screen.dart';
 import 'package:expense_tracker/dashboard/dashboard_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
@@ -14,11 +14,16 @@ class DashboardScreen extends GetView<DashboardController> {
         floatingActionButton: _floatingActionButton(context),
         Padding(
           padding: const EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [],
-          ),
+          child: _trxListView(context),
         ));
+  }
+
+  Widget _trxListView(BuildContext context) {
+    return Obx(() {
+      final trxList = controller.trxList.value;
+      if (trxList.isEmpty) return Container();
+      return Column(children: trxList.map((e) => Text(e.desc)).toList());
+    });
   }
 
   _floatingActionButton(BuildContext ctx) {
@@ -28,5 +33,3 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 }
-
-
