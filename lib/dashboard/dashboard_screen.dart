@@ -22,14 +22,66 @@ class DashboardScreen extends GetView<DashboardController> {
     return Obx(() {
       final trxList = controller.trxList.value;
       if (trxList.isEmpty) return Container();
-      return Column(children: trxList.map((e) => Text(e.desc)).toList());
+      return ListView.builder(
+        itemCount: trxList.length,
+        itemBuilder: (context, index) {
+          final trx = trxList[index];
+          final item = TrxItem(trx.amount, trx.desc);
+
+          return ListTile(
+            title: item.buildTitle(context),
+            subtitle: item.buildSubtitle(context),
+          );
+        },
+      );
     });
   }
 
   _floatingActionButton(BuildContext ctx) {
     return FloatingActionButton(
-      onPressed: () => print('add new transaction'),
+      onPressed: () => controller.goToAddTrxScreen(),
       child: const Icon(Icons.add),
     );
   }
+}
+
+/// The base class for the different types of items the list can contain.
+abstract class ListItem {
+  /// The title line to show in a list item.
+  Widget buildTitle(BuildContext context);
+
+  /// The subtitle line, if any, to show in a list item.
+  Widget buildSubtitle(BuildContext context);
+}
+
+/// A ListItem that contains data to display a heading.
+class HeadingItem implements ListItem {
+  final String heading;
+
+  HeadingItem(this.heading);
+
+  @override
+  Widget buildTitle(BuildContext context) {
+    return Text(
+      heading,
+      style: Theme.of(context).textTheme.headlineSmall,
+    );
+  }
+
+  @override
+  Widget buildSubtitle(BuildContext context) => const SizedBox.shrink();
+}
+
+/// A ListItem that contains data to display a message.
+class TrxItem implements ListItem {
+  final double amount;
+  final String desc;
+
+  TrxItem(this.amount, this.desc);
+
+  @override
+  Widget buildTitle(BuildContext context) => Text(desc);
+
+  @override
+  Widget buildSubtitle(BuildContext context) => Text('€${amount.toString()}');
 }

@@ -17,7 +17,7 @@ class Trx {
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         keyAmount: amount,
-        keyDateTime: dateTime,
+        keyDateTime: utils.convertDateToString(dateTime),
         keyDesc: desc,
       };
 
