@@ -1,7 +1,10 @@
+import 'package:expense_tracker/core/model/trx.dart';
+import 'package:expense_tracker/core/util/utils.dart';
 import 'package:expense_tracker/core/widget/base_screen.dart';
 import 'package:expense_tracker/dashboard/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:grouped_list/grouped_list.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
@@ -12,30 +15,20 @@ class DashboardScreen extends GetView<DashboardController> {
         title: 'Transactions',
         controller: controller,
         floatingActionButton: _floatingActionButton(context),
-        Padding(
-          padding: const EdgeInsets.all(15),
-          child: _trxListView(context),
-        ));
+        _trxListView(context));
   }
 
   Widget _trxListView(BuildContext context) {
     return Obx(() {
       final trxList = controller.trxList.value;
-      if (trxList.isEmpty) return Container();
-      return ListView.builder(
-        itemCount: trxList.length,
-        itemBuilder: (context, index) {
-          final trx = trxList[index];
-          final item = TrxItem(trx.amount, trx.desc);
-
-          return ListTile(
-            title: item.buildTitle(context),
-            subtitle: item.buildSubtitle(context),
-          );
-        },
-      );
+      if (trxList.isEmpty) return _noTrxHistoryView(context);
+      return _groupedListView(context, trxList);
     });
   }
+
+  _noTrxHistoryView(context) => Center(
+      child: Text('No transaction history\nClick the + button to add expense',
+          style: Theme.of(context).textTheme.bodyLarge, textAlign: TextAlign.center,));
 
   _floatingActionButton(BuildContext ctx) {
     return FloatingActionButton(
@@ -43,45 +36,36 @@ class DashboardScreen extends GetView<DashboardController> {
       child: const Icon(Icons.add),
     );
   }
-}
 
-/// The base class for the different types of items the list can contain.
-abstract class ListItem {
-  /// The title line to show in a list item.
-  Widget buildTitle(BuildContext context);
-
-  /// The subtitle line, if any, to show in a list item.
-  Widget buildSubtitle(BuildContext context);
-}
-
-/// A ListItem that contains data to display a heading.
-class HeadingItem implements ListItem {
-  final String heading;
-
-  HeadingItem(this.heading);
-
-  @override
-  Widget buildTitle(BuildContext context) {
-    return Text(
-      heading,
-      style: Theme.of(context).textTheme.headlineSmall,
+  _groupedListView(context, List<Trx> trxList) {
+    return GroupedListView<Trx, DateTime>(
+      elements: trxList,
+      groupBy: (trx) {
+        final date = trx.dateTime;
+        return DateTime(date.year, date.month, date.day);
+      },
+      order: GroupedListOrder.DESC,
+      groupSeparatorBuilder: (DateTime value) => Padding(
+        padding: const EdgeInsets.only(left: 15, bottom: 8, top: 25),
+        child: Text(
+          utils.convertDateToString(value),
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+      ),
+      itemBuilder: (context, trx) {
+        return Card(
+          elevation: 8.0,
+          margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+          child: SizedBox(
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+              leading: const Icon(Icons.account_circle),
+              title: Text(trx.desc),
+              trailing: Text('€${trx.amount.toString()}', style: Theme.of(context).textTheme.bodyLarge),
+            ),
+          ),
+        );
+      },
     );
   }
-
-  @override
-  Widget buildSubtitle(BuildContext context) => const SizedBox.shrink();
-}
-
-/// A ListItem that contains data to display a message.
-class TrxItem implements ListItem {
-  final double amount;
-  final String desc;
-
-  TrxItem(this.amount, this.desc);
-
-  @override
-  Widget buildTitle(BuildContext context) => Text(desc);
-
-  @override
-  Widget buildSubtitle(BuildContext context) => Text('€${amount.toString()}');
 }

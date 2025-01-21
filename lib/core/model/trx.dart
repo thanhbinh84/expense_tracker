@@ -2,14 +2,11 @@ import 'package:expense_tracker/core/util/utils.dart';
 
 class Trx {
   double amount = 0;
-  DateTime? dateTime;
+  DateTime dateTime;
   String desc = '';
 
-  Trx({
-    this.amount = 0,
-    this.desc = '',
-    this.dateTime
-  });
+  Trx({this.amount = 0, this.desc = '', DateTime? dateTime})
+      : dateTime = dateTime ?? DateTime.now();
 
   static const keyAmount = 'amount';
   static const keyDateTime = 'date';
@@ -28,4 +25,6 @@ class Trx {
       desc: map[keyDesc],
     );
   }
+
+  get dateString => utils.convertDateToString(dateTime);
 }

@@ -1,12 +1,20 @@
 import 'package:expense_tracker/core/controller/base_controller.dart';
 import 'package:expense_tracker/core/model/trx.dart';
 import 'package:expense_tracker/core/repository/trx_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class TrxController extends BaseController {
   static TrxController get to => Get.find();
   final trxRepository = Get.find<TrxRepository>();
-  Trx trx = Trx(dateTime: DateTime.now());
+  Trx trx = Trx();
+  final dateInputController = TextEditingController();
+
+  @override
+  onInit() {
+    super.onInit();
+    dateInputController.text = trx.dateString;
+  }
 
   updateTrx({String? amount, String? desc, DateTime? dateTime}) {
 
@@ -18,6 +26,7 @@ class TrxController extends BaseController {
     }
     if (dateTime != null) {
       trx.dateTime = dateTime;
+      dateInputController.text = trx.dateString;
     }
   }
 

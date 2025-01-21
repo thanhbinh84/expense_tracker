@@ -37,19 +37,19 @@ class Utils {
     errorToast(e.toString());
   }
 
-  static final DateFormat dateTimeFormat = DateFormat('yyyy-MM-dd HH:mm');
+  static final DateFormat dateTimeFormat = DateFormat('dd.MM.yyyy');
 
   DateTime? convertStringToDate(String dateString) {
     try {
-      return dateTimeFormat.parse(dateString, true).toLocal();
+      return dateTimeFormat.parse(dateString, true);
     } catch (e) {
       return null;
     }
   }
 
-  String convertDateToString(DateTime? date) {
+  String convertDateToString(DateTime date) {
     try {
-      return dateTimeFormat.format(date!.toUtc());
+      return dateTimeFormat.format(date);
     } catch (e) {
       return '';
     }

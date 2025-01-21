@@ -1,4 +1,3 @@
-import 'package:expense_tracker/core/util/utils.dart';
 import 'package:expense_tracker/core/widget/base_screen.dart';
 import 'package:expense_tracker/trx/trx_controller.dart';
 import 'package:flutter/material.dart';
@@ -56,14 +55,13 @@ class TrxScreen extends GetView<TrxController> {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: TextFormField(
-        initialValue: utils.convertDateToString(controller.trx.dateTime),
+        controller: controller.dateInputController,
         showCursor: false,
         readOnly: true,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Date',
         ),
-        keyboardType: TextInputType.number,
         onTap: () => _showDatePicker(context),
       ),
     );
@@ -77,11 +75,11 @@ class TrxScreen extends GetView<TrxController> {
   }
 
   _showDatePicker(context) async {
-    final today = controller.trx.dateTime ?? DateTime.now();
+    final today = DateTime.now();
     final firstDate = today.subtract(Duration(days: 365));
     final DateTime? selectedDate = await showDatePicker(
-        context: context, initialDate: today, firstDate: firstDate, lastDate: today);
+        context: context, initialDate: controller.trx.dateTime, firstDate: firstDate, lastDate: today);
 
-    if (selectedDate != null && !context.mounted) controller.updateTrx(dateTime: selectedDate);
+    if (selectedDate != null && context.mounted) controller.updateTrx(dateTime: selectedDate);
   }
 }
