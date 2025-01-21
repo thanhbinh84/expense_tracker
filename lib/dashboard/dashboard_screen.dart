@@ -59,7 +59,7 @@ class DashboardScreen extends GetView<DashboardController> {
           child: SizedBox(
             child: ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-              leading: const Icon(Icons.account_circle),
+              leading: Icon(trx.category.iconData),
               title: Text(trx.desc),
               trailing: Text('€${trx.amount.toString()}', style: Theme.of(context).textTheme.bodyLarge),
             ),

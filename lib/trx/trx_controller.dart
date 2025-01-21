@@ -9,14 +9,16 @@ class TrxController extends BaseController {
   final trxRepository = Get.find<TrxRepository>();
   Trx trx = Trx();
   final dateInputController = TextEditingController();
+  final categoryInputController = TextEditingController();
 
   @override
   onInit() {
     super.onInit();
     dateInputController.text = trx.dateString;
+    categoryInputController.text = trx.category.name;
   }
 
-  updateTrx({String? amount, String? desc, DateTime? dateTime}) {
+  updateTrx({String? amount, String? desc, DateTime? dateTime, Category? category}) {
 
     if (amount != null) {
       trx.amount = double.tryParse(amount) ?? 0;
@@ -27,6 +29,10 @@ class TrxController extends BaseController {
     if (dateTime != null) {
       trx.dateTime = dateTime;
       dateInputController.text = trx.dateString;
+    }
+    if (category != null) {
+      trx.category = category;
+      categoryInputController.text = category.name;
     }
   }
 
