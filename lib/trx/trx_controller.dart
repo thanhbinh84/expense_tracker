@@ -18,7 +18,6 @@ class TrxController extends BaseController {
   }
 
   updateTrx({String? amount, String? desc, DateTime? dateTime, Category? category}) {
-
     if (amount != null) {
       trx.amount = double.tryParse(amount) ?? 0;
     }

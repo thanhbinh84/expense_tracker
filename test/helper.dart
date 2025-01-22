@@ -17,7 +17,17 @@ class ManualMockDashboardController extends GetxController
   Rx<List<Trx>> get trxList => Rx<List<Trx>>([]);
 }
 
-class ManualMockTrxRepository extends GetxService with Mock implements TrxRepository {}
+class ManualMockTrxRepository extends GetxService with Mock implements TrxRepository {
+  @override
+  Stream<List<Trx>> getTrxList() {
+    return Stream.value([]);
+  }
+
+  @override
+  Future<void> saveTrx(Trx trx) {
+    return Future(() => print('saveTrx'));
+  }
+}
 
 extension PumpGetApp on WidgetTester {
   Future<void> pumpGetApp(Widget widget) async {

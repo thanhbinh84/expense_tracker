@@ -34,7 +34,7 @@ void main() {
     await tester.tap(find.byKey(Key(Txt.category)));
     await tester.pumpAndSettle();
     // Tap last category item
-    await tester.tap(find.text(Category.list.last.name).first, warnIfMissed: false);
+    await tester.tap(find.text(Category.list.last.name).last);
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key(Txt.save)));
     await tester.pumpAndSettle();

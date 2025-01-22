@@ -2,6 +2,7 @@ import 'package:expense_tracker/core/repository/trx_repository.dart';
 import 'package:expense_tracker/core/util/const/txt.dart';
 import 'package:expense_tracker/dashboard/dashboard_controller.dart';
 import 'package:expense_tracker/dashboard/dashboard_screen.dart';
+import 'package:expense_tracker/trx/trx_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -29,6 +30,16 @@ void main() {
     expect(addButtonIcon.icon == Icons.add, true);
   });
 
+  testWidgets('The add button should route to the transaction screen', (tester) async {
+    Get.put<TrxRepository>(ManualMockTrxRepository());
+    Get.put(DashboardController());
+    await tester.pumpGetAppWithRoute(DashboardScreen());
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+    expect(find.byType(TrxScreen), findsOneWidget);
+    expect(find.byType(DashboardScreen), findsNothing);
+  });
+
   testWidgets('Display a list of expenses grouped by day', (tester) async {
     Get.reset();
     final mockTrxRepository = Get.put<TrxRepository>(MockTrxRepository());
@@ -48,5 +59,14 @@ void main() {
     expect(find.text(mockTrx1.desc), findsOneWidget);
     expect(find.text(mockTrx1.amountString), findsOneWidget);
     expect(find.byIcon(mockTrx1.category.iconData), findsAtLeast(1));
+  });
+
+  testWidgets('Error should throw when cannot get trx list', (tester) async {
+    Get.reset();
+    final mockTrxRepository = Get.put<TrxRepository>(MockTrxRepository());
+    when(mockTrxRepository.getTrxList()).thenThrow(Exception(''));
+    final controller = Get.put(DashboardController());
+    await tester.pumpGetApp(DashboardScreen());
+    expect(controller.status.isError, true);
   });
 }
