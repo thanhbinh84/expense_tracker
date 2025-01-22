@@ -5,7 +5,6 @@ import 'package:expense_tracker/core/repository/trx_repository.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends BaseController {
-  static DashboardController get to => Get.find();
   final trxRepository = Get.find<TrxRepository>();
   final trxList = Rx<List<Trx>>([]);
 

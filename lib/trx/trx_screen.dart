@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/model/trx.dart';
+import 'package:expense_tracker/core/util/const/txt.dart';
 import 'package:expense_tracker/core/widget/base_screen.dart';
 import 'package:expense_tracker/trx/trx_controller.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,10 @@ class TrxScreen extends GetView<TrxController> {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: TextFormField(
+        key: Key(Txt.description),
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          labelText: 'Description',
+          labelText:Txt.description,
         ),
         onChanged: (value) => controller.updateTrx(desc: value),
       ),
@@ -43,9 +45,10 @@ class TrxScreen extends GetView<TrxController> {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: TextFormField(
+        key: Key(Txt.amount),
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          labelText: 'Amount',
+          labelText:Txt.amount,
         ),
         keyboardType: TextInputType.number,
         onChanged: (value) => controller.updateTrx(amount: value),
@@ -57,12 +60,13 @@ class TrxScreen extends GetView<TrxController> {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: TextFormField(
+        key: Key(Txt.date),
         controller: controller.dateInputController,
         showCursor: false,
         readOnly: true,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          labelText: 'Date',
+          labelText:Txt.date,
         ),
         onTap: () => _showDatePicker(context),
       ),
@@ -73,10 +77,11 @@ class TrxScreen extends GetView<TrxController> {
     return Padding(
       padding: const EdgeInsets.all(30),
       child: ElevatedButton(
+          key: Key(Txt.save),
           onPressed: () => controller.saveTrx(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text('Save'),
+            child: Text(Txt.save),
           )),
     );
   }
@@ -97,10 +102,11 @@ class TrxScreen extends GetView<TrxController> {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: DropdownMenu<Category>(
+        key: Key(Txt.category),
         width: double.infinity,
         initialSelection: controller.trx.category,
         controller: controller.categoryInputController,
-        label: const Text('Category'),
+        label: const Text(Txt.category),
         onSelected: (Category? category) => controller.updateTrx(category: category),
         dropdownMenuEntries: Category.list.map<DropdownMenuEntry<Category>>((Category category) {
           return DropdownMenuEntry<Category>(

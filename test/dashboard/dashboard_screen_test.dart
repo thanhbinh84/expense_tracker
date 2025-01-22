@@ -30,6 +30,7 @@ void main() {
   });
 
   testWidgets('Display a list of expenses grouped by day', (tester) async {
+    Get.reset();
     final mockTrxRepository = Get.put<TrxRepository>(MockTrxRepository());
     when(mockTrxRepository.getTrxList()).thenAnswer((_) => Stream.value(mockTrxList));
     Get.put(DashboardController());
@@ -39,6 +40,7 @@ void main() {
   });
 
   testWidgets('Item list should show amount, description and category by icon', (tester) async {
+    Get.reset();
     final mockTrxRepository = Get.put<TrxRepository>(MockTrxRepository());
     when(mockTrxRepository.getTrxList()).thenAnswer((_) => Stream.value(mockTrxList));
     Get.put(DashboardController());
