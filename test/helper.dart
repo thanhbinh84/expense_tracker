@@ -7,7 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
 
-class ManualMockDashboardController extends GetxController with Mock implements DashboardController {
+class ManualMockDashboardController extends GetxController
+    with Mock
+    implements DashboardController {
   @override
   RxStatus get status => RxStatus.success();
 
@@ -15,8 +17,7 @@ class ManualMockDashboardController extends GetxController with Mock implements 
   Rx<List<Trx>> get trxList => Rx<List<Trx>>([]);
 }
 
-class ManualMockTrxRepository extends GetxService with Mock implements TrxRepository {
-}
+class ManualMockTrxRepository extends GetxService with Mock implements TrxRepository {}
 
 extension PumpGetApp on WidgetTester {
   Future<void> pumpGetApp(Widget widget) async {
@@ -39,3 +40,12 @@ void initAppServices() {
   Get.put<TrxRepository>(ManualMockTrxRepository());
   Get.put<DashboardController>(ManualMockDashboardController());
 }
+
+final mockTrx1 =
+    Trx(amount: 1, desc: 'desc1', dateTime: DateTime(2025, 1, 22), category: Category.food);
+final mockTrx2 =
+    Trx(amount: 2, desc: 'desc2', dateTime: DateTime(2025, 1, 22), category: Category.shopping);
+final mockTrx3 =
+    Trx(amount: 3, desc: 'desc3', dateTime: DateTime(2025, 1, 21), category: Category.travel);
+
+final mockTrxList = [mockTrx1, mockTrx2, mockTrx3];

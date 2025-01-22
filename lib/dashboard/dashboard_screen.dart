@@ -1,4 +1,5 @@
 import 'package:expense_tracker/core/model/trx.dart';
+import 'package:expense_tracker/core/util/const/txt.dart';
 import 'package:expense_tracker/core/util/utils.dart';
 import 'package:expense_tracker/core/widget/base_screen.dart';
 import 'package:expense_tracker/dashboard/dashboard_controller.dart';
@@ -27,7 +28,7 @@ class DashboardScreen extends GetView<DashboardController> {
   }
 
   _noTrxHistoryView(context) => Center(
-      child: Text('No transaction history\nClick the + button to add expense',
+      child: Text(Txt.noTransactionHistory,
           style: Theme.of(context).textTheme.bodyLarge, textAlign: TextAlign.center,));
 
   _floatingActionButton(BuildContext ctx) {
@@ -61,7 +62,7 @@ class DashboardScreen extends GetView<DashboardController> {
               contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
               leading: Icon(trx.category.iconData),
               title: Text(trx.desc),
-              trailing: Text('€${trx.amount.toString()}', style: Theme.of(context).textTheme.bodyLarge),
+              trailing: Text(trx.amountString, style: Theme.of(context).textTheme.bodyLarge),
             ),
           ),
         );

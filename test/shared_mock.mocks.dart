@@ -3,12 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:expense_tracker/core/api/TrxApi.dart' as _i2;
-import 'package:expense_tracker/core/model/trx.dart' as _i6;
-import 'package:expense_tracker/core/repository/trx_repository.dart' as _i4;
-import 'package:get/get.dart' as _i3;
+import 'package:expense_tracker/core/model/trx.dart' as _i5;
+import 'package:expense_tracker/core/repository/trx_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -30,16 +29,10 @@ class _FakeTrxApi_0 extends _i1.SmartFake implements _i2.TrxApi {
     : super(parent, parentInvocation);
 }
 
-class _FakeInternalFinalCallback_1<T> extends _i1.SmartFake
-    implements _i3.InternalFinalCallback<T> {
-  _FakeInternalFinalCallback_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
 /// A class which mocks [TrxRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTrxRepository extends _i1.Mock implements _i4.TrxRepository {
+class MockTrxRepository extends _i1.Mock implements _i3.TrxRepository {
   @override
   _i2.TrxApi get trxApi =>
       (super.noSuchMethod(
@@ -53,92 +46,20 @@ class MockTrxRepository extends _i1.Mock implements _i4.TrxRepository {
           as _i2.TrxApi);
 
   @override
-  _i3.InternalFinalCallback<void> get onStart =>
-      (super.noSuchMethod(
-            Invocation.getter(#onStart),
-            returnValue: _FakeInternalFinalCallback_1<void>(
-              this,
-              Invocation.getter(#onStart),
-            ),
-            returnValueForMissingStub: _FakeInternalFinalCallback_1<void>(
-              this,
-              Invocation.getter(#onStart),
-            ),
-          )
-          as _i3.InternalFinalCallback<void>);
-
-  @override
-  _i3.InternalFinalCallback<void> get onDelete =>
-      (super.noSuchMethod(
-            Invocation.getter(#onDelete),
-            returnValue: _FakeInternalFinalCallback_1<void>(
-              this,
-              Invocation.getter(#onDelete),
-            ),
-            returnValueForMissingStub: _FakeInternalFinalCallback_1<void>(
-              this,
-              Invocation.getter(#onDelete),
-            ),
-          )
-          as _i3.InternalFinalCallback<void>);
-
-  @override
-  bool get initialized =>
-      (super.noSuchMethod(
-            Invocation.getter(#initialized),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  bool get isClosed =>
-      (super.noSuchMethod(
-            Invocation.getter(#isClosed),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
-  _i5.Stream<List<_i6.Trx>> getTrxList() =>
+  _i4.Stream<List<_i5.Trx>> getTrxList() =>
       (super.noSuchMethod(
             Invocation.method(#getTrxList, []),
-            returnValue: _i5.Stream<List<_i6.Trx>>.empty(),
-            returnValueForMissingStub: _i5.Stream<List<_i6.Trx>>.empty(),
+            returnValue: _i4.Stream<List<_i5.Trx>>.empty(),
+            returnValueForMissingStub: _i4.Stream<List<_i5.Trx>>.empty(),
           )
-          as _i5.Stream<List<_i6.Trx>>);
+          as _i4.Stream<List<_i5.Trx>>);
 
   @override
-  _i5.Future<void> saveTrx(_i6.Trx? trx) =>
+  _i4.Future<void> saveTrx(_i5.Trx? trx) =>
       (super.noSuchMethod(
             Invocation.method(#saveTrx, [trx]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
           )
-          as _i5.Future<void>);
-
-  @override
-  void onInit() => super.noSuchMethod(
-    Invocation.method(#onInit, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void onReady() => super.noSuchMethod(
-    Invocation.method(#onReady, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void onClose() => super.noSuchMethod(
-    Invocation.method(#onClose, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void $configureLifeCycle() => super.noSuchMethod(
-    Invocation.method(#$configureLifeCycle, []),
-    returnValueForMissingStub: null,
-  );
+          as _i4.Future<void>);
 }

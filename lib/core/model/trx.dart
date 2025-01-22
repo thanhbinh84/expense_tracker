@@ -32,6 +32,7 @@ class Trx {
   }
 
   get dateString => utils.convertDateToString(dateTime);
+  get amountString => '€${amount.toString()}';
 }
 
 class Category {
