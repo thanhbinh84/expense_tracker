@@ -42,10 +42,10 @@ void initAppServices() {
 }
 
 final mockTrx1 =
-    Trx(amount: 1, desc: 'desc1', dateTime: DateTime(2025, 1, 22), category: Category.food);
+    Trx(amount: 1, desc: 'desc1', dateTime: DateTime(2025, 1, 21), category: Category.food);
 final mockTrx2 =
-    Trx(amount: 2, desc: 'desc2', dateTime: DateTime(2025, 1, 22), category: Category.shopping);
+    Trx(amount: 2, desc: 'desc2', dateTime: DateTime(2025, 1, 21), category: Category.shopping);
 final mockTrx3 =
-    Trx(amount: 3, desc: 'desc3', dateTime: DateTime(2025, 1, 21), category: Category.travel);
+    Trx(amount: 3, desc: 'desc3', dateTime: DateTime(2025, 1, 20), category: Category.travel);
 
 final mockTrxList = [mockTrx1, mockTrx2, mockTrx3];

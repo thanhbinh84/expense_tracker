@@ -112,9 +112,6 @@ class TrxScreen extends GetView<TrxController> {
           return DropdownMenuEntry<Category>(
             value: category,
             label: category.name,
-            // style: MenuItemButton.styleFrom(
-            //   foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-            // ),
           );
         }).toList(),
       ),
