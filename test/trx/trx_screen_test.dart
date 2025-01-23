@@ -80,12 +80,22 @@ void main() {
     expect(find.byType(TrxScreen), findsNothing);
   });
 
+  testWidgets('Error messages should display for wrong input', (tester) async {
+    await tester.pumpGetApp(TrxScreen());
+    await tester.tap(find.byKey(Key(Txt.save)));
+    await tester.pumpAndSettle();
+    expect(find.text(Txt.pleaseEnterAmount), findsOne);
+    expect(find.text(Txt.pleaseEnterDescription), findsOne);
+  });
+
   testWidgets('Error should throw when saving goes wrong', (tester) async {
     Get.reset();
     final mockTrxRepository = Get.put<TrxRepository>(MockTrxRepository());
     when(mockTrxRepository.saveTrx(mockTrx1)).thenThrow(Exception(''));
     final controller = Get.put(TrxController());
     await tester.pumpGetApp(TrxScreen());
+    await tester.enterText(find.byKey(Key(Txt.description)), mockTrx1.desc);
+    await tester.enterText(find.byKey(Key(Txt.amount)), mockTrx1.amount.toString());
     controller.trx = mockTrx1;
     await tester.tap(find.byKey(Key(Txt.save)));
     await tester.pumpAndSettle();

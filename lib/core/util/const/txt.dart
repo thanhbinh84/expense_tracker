@@ -5,4 +5,6 @@ class Txt {
   static const String category = 'Category';
   static const String date = 'Date';
   static const String save = 'Save';
+  static const String pleaseEnterDescription = 'Please enter description';
+  static const String pleaseEnterAmount = 'Please enter amount';
 }

@@ -15,14 +15,17 @@ class TrxScreen extends GetView<TrxController> {
         controller: controller,
         Padding(
           padding: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              _descriptionInputView(context),
-              _amountInputView(context),
-              _dateInputView(context),
-              _categoryMenuView(context),
-              _saveButton(context)
-            ],
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              children: [
+                _descriptionInputView(context),
+                _amountInputView(context),
+                _dateInputView(context),
+                _categoryMenuView(context),
+                _saveButton(context)
+              ],
+            ),
           ),
         ));
   }
@@ -32,9 +35,16 @@ class TrxScreen extends GetView<TrxController> {
       padding: const EdgeInsets.only(top: 15),
       child: TextFormField(
         key: Key(Txt.description),
+        validator: (value) {
+          if (value == null || value.trim().isEmpty) {
+            return Txt.pleaseEnterDescription;
+          }
+          return null;
+        },
+        maxLength: 50,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          labelText:Txt.description,
+          labelText: Txt.description,
         ),
         onChanged: (value) => controller.updateTrx(desc: value),
       ),
@@ -46,9 +56,17 @@ class TrxScreen extends GetView<TrxController> {
       padding: const EdgeInsets.only(top: 15),
       child: TextFormField(
         key: Key(Txt.amount),
+        validator: (value) {
+          final num = double.tryParse(value ?? '') ?? 0;
+          if (num <= 0) {
+            return Txt.pleaseEnterAmount;
+          }
+          return null;
+        },
+        maxLength: 10,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          labelText:Txt.amount,
+          labelText: Txt.amount,
         ),
         keyboardType: TextInputType.number,
         onChanged: (value) => controller.updateTrx(amount: value),
@@ -66,7 +84,7 @@ class TrxScreen extends GetView<TrxController> {
         readOnly: true,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          labelText:Txt.date,
+          labelText: Txt.date,
         ),
         onTap: () => _showDatePicker(context),
       ),

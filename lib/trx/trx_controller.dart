@@ -9,6 +9,7 @@ class TrxController extends BaseController {
   Trx trx = Trx();
   final dateInputController = TextEditingController();
   final categoryInputController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   onInit() {
@@ -37,9 +38,11 @@ class TrxController extends BaseController {
   saveTrx() async {
     try {
       loading();
-      await trxRepository.saveTrx(trx);
+      if (formKey.currentState!.validate()) {
+        await trxRepository.saveTrx(trx);
+        Get.back();
+      }
       success();
-      Get.back();
     } catch (e) {
       error(error: e.toString());
     }
