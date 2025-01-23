@@ -10,6 +10,7 @@ class BaseScreen extends StatelessWidget {
   final BaseController? controller;
   final String? title;
   final FloatingActionButton? floatingActionButton;
+  final List<Widget>? appBarActions;
 
   const BaseScreen(this.body,
       {super.key,
@@ -17,6 +18,7 @@ class BaseScreen extends StatelessWidget {
       this.resizeToAvoidBottomPadding = false,
       this.onWillPop,
       this.floatingActionButton,
+      this.appBarActions,
       this.title});
 
   @override
@@ -50,6 +52,8 @@ class BaseScreen extends StatelessWidget {
         floatingActionButton: floatingActionButton,
       );
 
-  _appBar(ctx) =>
-      AppBar(title: Text(title!), backgroundColor: Theme.of(ctx).colorScheme.inversePrimary);
+  _appBar(ctx) => AppBar(
+      title: Text(title!),
+      backgroundColor: Theme.of(ctx).colorScheme.inversePrimary,
+      actions: appBarActions);
 }

@@ -2,6 +2,7 @@ import 'package:expense_tracker/core/repository/trx_repository.dart';
 import 'package:expense_tracker/core/util/const/txt.dart';
 import 'package:expense_tracker/dashboard/dashboard_controller.dart';
 import 'package:expense_tracker/dashboard/dashboard_screen.dart';
+import 'package:expense_tracker/summary/summary_screen.dart';
 import 'package:expense_tracker/trx/trx_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,6 +38,16 @@ void main() {
     await tester.tap(find.byType(FloatingActionButton));
     await tester.pumpAndSettle();
     expect(find.byType(TrxScreen), findsOneWidget);
+    expect(find.byType(DashboardScreen), findsNothing);
+  });
+
+  testWidgets('The summary button should route to the summary screen', (tester) async {
+    Get.put<TrxRepository>(ManualMockTrxRepository());
+    Get.put(DashboardController());
+    await tester.pumpGetAppWithRoute(DashboardScreen());
+    await tester.tap(find.byIcon(Icons.summarize));
+    await tester.pumpAndSettle();
+    expect(find.byType(SummaryScreen), findsOneWidget);
     expect(find.byType(DashboardScreen), findsNothing);
   });
 

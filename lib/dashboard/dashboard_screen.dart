@@ -14,9 +14,22 @@ class DashboardScreen extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return BaseScreen(
         title: 'Transactions',
+        appBarActions: _getAppBarActions(context),
         controller: controller,
         floatingActionButton: _floatingActionButton(context),
         _trxListView(context));
+  }
+
+  _getAppBarActions(context) {
+    return [
+      IconButton(
+        icon: Icon(
+          Icons.summarize,
+          color: Theme.of(context).primaryColor,
+        ),
+        onPressed: controller.goToSummaryScreen,
+      )
+    ];
   }
 
   Widget _trxListView(BuildContext context) {
@@ -28,8 +41,11 @@ class DashboardScreen extends GetView<DashboardController> {
   }
 
   _noTrxHistoryView(context) => Center(
-      child: Text(Txt.noTransactionHistory,
-          style: Theme.of(context).textTheme.bodyLarge, textAlign: TextAlign.center,));
+          child: Text(
+        Txt.noTransactionHistory,
+        style: Theme.of(context).textTheme.bodyLarge,
+        textAlign: TextAlign.center,
+      ));
 
   _floatingActionButton(BuildContext ctx) {
     return FloatingActionButton(

@@ -7,4 +7,9 @@ class Txt {
   static const String save = 'Save';
   static const String pleaseEnterDescription = 'Please enter description';
   static const String pleaseEnterAmount = 'Please enter amount';
+  static const String spent = 'Spent';
+  static const String last = 'Last';
+  static const String transaction = 'transaction';
+  static const String transactions = 'transactions';
+  static const String byCategory = 'By category';
 }

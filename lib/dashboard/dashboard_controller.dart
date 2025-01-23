@@ -28,4 +28,5 @@ class DashboardController extends BaseController {
   }
 
   goToAddTrxScreen() => Get.toNamed(Routes.trx);
+  goToSummaryScreen() => Get.toNamed(Routes.summary);
 }
