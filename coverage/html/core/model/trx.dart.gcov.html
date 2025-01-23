@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">21.7&nbsp;%</td>
-            <td class="headerCovTableEntry">23</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntry">21</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-01-22 17:27:39</td>
+            <td class="headerValue">2025-01-22 18:50:30</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -69,7 +69,7 @@
 <span id="L7"><span class="lineNum">       7</span>              :   String desc = '';</span>
 <span id="L8"><span class="lineNum">       8</span>              :   Category category = Category.food;</span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
-<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC">           2 :   Trx({this.amount = 0, this.desc = '', DateTime? dateTime, this.category = Category.food})</span></span>
+<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC">           4 :   Trx({this.amount = 0, this.desc = '', DateTime? dateTime, this.category = Category.food})</span></span>
 <span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">           2 :       : dateTime = dateTime ?? DateTime.now();</span></span>
 <span id="L12"><span class="lineNum">      12</span>              : </span>
 <span id="L13"><span class="lineNum">      13</span>              :   static const keyAmount = 'amount';</span>
@@ -77,23 +77,23 @@
 <span id="L15"><span class="lineNum">      15</span>              :   static const keyDesc = 'desc';</span>
 <span id="L16"><span class="lineNum">      16</span>              :   static const keyCategoryIndex = 'category';</span>
 <span id="L17"><span class="lineNum">      17</span>              : </span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaUNC">           0 :   Map&lt;String, dynamic&gt; toJson() =&gt; &lt;String, dynamic&gt;{</span></span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaUNC">           0 :         keyAmount: amount,</span></span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaUNC">           0 :         keyDateTime: utils.convertDateToString(dateTime),</span></span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaUNC">           0 :         keyDesc: desc,</span></span>
-<span id="L22"><span class="lineNum">      22</span> <span class="tlaUNC">           0 :         keyCategoryIndex: category.index</span></span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           2 :   Map&lt;String, dynamic&gt; toJson() =&gt; &lt;String, dynamic&gt;{</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           1 :         keyAmount: amount,</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           3 :         keyDateTime: utils.convertDateToString(dateTime),</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           1 :         keyDesc: desc,</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           2 :         keyCategoryIndex: category.index</span></span>
 <span id="L23"><span class="lineNum">      23</span>              :       };</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaUNC">           0 :   factory Trx.fromJson(Map&lt;String, dynamic&gt; map) {</span></span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaUNC">           0 :     return Trx(</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaUNC">           0 :       amount: map[keyAmount],</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaUNC">           0 :       dateTime: utils.convertStringToDate(map[keyDateTime]),</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaUNC">           0 :       desc: map[keyDesc],</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaUNC">           0 :       category: Category.getCategory(map[keyCategoryIndex])</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           1 :   factory Trx.fromJson(Map&lt;String, dynamic&gt; map) {</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           1 :     return Trx(</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :       amount: map[keyAmount],</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           3 :       dateTime: utils.convertStringToDate(map[keyDateTime]),</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :       desc: map[keyDesc],</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           2 :       category: Category.getCategory(map[keyCategoryIndex])</span></span>
 <span id="L31"><span class="lineNum">      31</span>              :     );</span>
 <span id="L32"><span class="lineNum">      32</span>              :   }</span>
 <span id="L33"><span class="lineNum">      33</span>              : </span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           8 :   get dateString =&gt; utils.convertDateToString(dateTime);</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">          12 :   get dateString =&gt; utils.convertDateToString(dateTime);</span></span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           4 :   get amountString =&gt; '€${amount.toString()}';</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : }</span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
@@ -102,29 +102,26 @@
 <span id="L40"><span class="lineNum">      40</span>              :   final int index;</span>
 <span id="L41"><span class="lineNum">      41</span>              :   final IconData iconData;</span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           3 :   const Category._internal(this.index, this.name, this.iconData);</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           5 :   const Category._internal(this.index, this.name, this.iconData);</span></span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :   @override</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :   toString() =&gt; 'Enum.$name';</span></span>
-<span id="L47"><span class="lineNum">      47</span>              : </span>
-<span id="L48"><span class="lineNum">      48</span>              :   static const food = Category._internal(0, 'Food', Icons.food_bank);</span>
-<span id="L49"><span class="lineNum">      49</span>              :   static const travel = Category._internal(1, 'Travel', Icons.flight);</span>
-<span id="L50"><span class="lineNum">      50</span>              :   static const shopping = Category._internal(2, 'Shopping', Icons.shopping_bag);</span>
-<span id="L51"><span class="lineNum">      51</span>              : </span>
-<span id="L52"><span class="lineNum">      52</span>              :   static const list = [food, travel, shopping];</span>
-<span id="L53"><span class="lineNum">      53</span>              : </span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaUNC">           0 :   static Category getCategory(int index) {</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :     if (Category.food.index == index) {</span></span>
-<span id="L56"><span class="lineNum">      56</span>              :       return Category.food;</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC">           0 :     } else if (Category.travel.index == index) {</span></span>
-<span id="L58"><span class="lineNum">      58</span>              :       return Category.travel;</span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC">           0 :     } else if (Category.shopping.index == index) {</span></span>
-<span id="L60"><span class="lineNum">      60</span>              :       return Category.shopping;</span>
-<span id="L61"><span class="lineNum">      61</span>              :     } else {</span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :       throw UnimplementedError();</span></span>
-<span id="L63"><span class="lineNum">      63</span>              :     }</span>
-<span id="L64"><span class="lineNum">      64</span>              :   }</span>
-<span id="L65"><span class="lineNum">      65</span>              : }</span>
+<span id="L45"><span class="lineNum">      45</span>              :   static const food = Category._internal(0, 'Food', Icons.food_bank);</span>
+<span id="L46"><span class="lineNum">      46</span>              :   static const travel = Category._internal(1, 'Travel', Icons.flight);</span>
+<span id="L47"><span class="lineNum">      47</span>              :   static const shopping = Category._internal(2, 'Shopping', Icons.shopping_bag);</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              :   static const list = [food, travel, shopping];</span>
+<span id="L50"><span class="lineNum">      50</span>              : </span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           1 :   static Category getCategory(int index) {</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           2 :     if (Category.food.index == index) {</span></span>
+<span id="L53"><span class="lineNum">      53</span>              :       return Category.food;</span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           2 :     } else if (Category.travel.index == index) {</span></span>
+<span id="L55"><span class="lineNum">      55</span>              :       return Category.travel;</span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           2 :     } else if (Category.shopping.index == index) {</span></span>
+<span id="L57"><span class="lineNum">      57</span>              :       return Category.shopping;</span>
+<span id="L58"><span class="lineNum">      58</span>              :     } else {</span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           1 :       throw ArgumentError();</span></span>
+<span id="L60"><span class="lineNum">      60</span>              :     }</span>
+<span id="L61"><span class="lineNum">      61</span>              :   }</span>
+<span id="L62"><span class="lineNum">      62</span>              : }</span>
         </pre>
               </td>
             </tr>

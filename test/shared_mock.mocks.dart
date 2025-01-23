@@ -63,3 +63,26 @@ class MockTrxRepository extends _i1.Mock implements _i3.TrxRepository {
           )
           as _i4.Future<void>);
 }
+
+/// A class which mocks [TrxApi].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTrxApi extends _i1.Mock implements _i2.TrxApi {
+  @override
+  _i4.Stream<List<_i5.Trx>> getTrxList() =>
+      (super.noSuchMethod(
+            Invocation.method(#getTrxList, []),
+            returnValue: _i4.Stream<List<_i5.Trx>>.empty(),
+            returnValueForMissingStub: _i4.Stream<List<_i5.Trx>>.empty(),
+          )
+          as _i4.Stream<List<_i5.Trx>>);
+
+  @override
+  _i4.Future<void> saveTrx(_i5.Trx? trx) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveTrx, [trx]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+}

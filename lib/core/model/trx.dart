@@ -42,9 +42,6 @@ class Category {
 
   const Category._internal(this.index, this.name, this.iconData);
 
-  @override
-  toString() => 'Enum.$name';
-
   static const food = Category._internal(0, 'Food', Icons.food_bank);
   static const travel = Category._internal(1, 'Travel', Icons.flight);
   static const shopping = Category._internal(2, 'Shopping', Icons.shopping_bag);
@@ -59,7 +56,7 @@ class Category {
     } else if (Category.shopping.index == index) {
       return Category.shopping;
     } else {
-      throw UnimplementedError();
+      throw ArgumentError();
     }
   }
 }
