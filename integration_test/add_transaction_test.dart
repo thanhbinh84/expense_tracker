@@ -34,7 +34,7 @@ void main() {
     await tester.tap(find.byKey(Key(Txt.category)));
     await tester.pumpAndSettle();
     // Tap last category item
-    await tester.tap(find.text(Category.list.last.name).last);
+    await tester.tap(find.text(mockTrx1.category.name).last);
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(Key(Txt.save)));
     await tester.pumpAndSettle();
@@ -46,7 +46,6 @@ void main() {
     expect(find.text(mockTrx1.desc), findsOneWidget);
     expect(find.text(utils.convertDateToString(DateTime.now())), findsOneWidget);
     expect(find.text(mockTrx1.amountString), findsOneWidget);
-    // TODO double check the reason to fail
-    // expect(find.byIcon(mockTrx1.category.iconData), findsOneWidget);
+    expect(find.byIcon(mockTrx1.category.iconData), findsOneWidget);
   });
 }
