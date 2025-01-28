@@ -21,6 +21,6 @@ void main() {
     for (Category category in Category.list) {
       expect(category, Category.getCategory(category.index));
     }
-    expect(() => Category.getCategory(-1), throwsArgumentError);
+    expect(() => Category.getCategory(-2), throwsArgumentError);
   });
 }

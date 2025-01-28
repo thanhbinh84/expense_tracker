@@ -14,7 +14,10 @@ class ManualMockDashboardController extends GetxController
   RxStatus get status => RxStatus.success();
 
   @override
-  Rx<List<Trx>> get trxList => Rx<List<Trx>>([]);
+  Rx<List<Trx>> get filteredTrxList => Rx<List<Trx>>([]);
+
+  @override
+  Rx<Category> get category => Category.all.obs;
 }
 
 class ManualMockTrxRepository extends GetxService with Mock implements TrxRepository {

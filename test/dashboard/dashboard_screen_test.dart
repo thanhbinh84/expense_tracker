@@ -1,3 +1,4 @@
+import 'package:expense_tracker/core/model/trx.dart';
 import 'package:expense_tracker/core/repository/trx_repository.dart';
 import 'package:expense_tracker/core/util/const/txt.dart';
 import 'package:expense_tracker/dashboard/dashboard_controller.dart';
@@ -49,6 +50,24 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(SummaryScreen), findsOneWidget);
     expect(find.byType(DashboardScreen), findsNothing);
+  });
+
+  testWidgets('Allow users to filter expenses by category', (tester) async {
+    Get.reset();
+    final mockTrxRepository = Get.put<TrxRepository>(MockTrxRepository());
+    when(mockTrxRepository.getTrxList()).thenAnswer((_) => Stream.value(mockTrxList));
+    Get.put(DashboardController());
+    await tester.pumpGetAppWithRoute(DashboardScreen());
+    await tester.tap(find.byIcon(Icons.filter_list_rounded));
+    await tester.pumpAndSettle();
+    for (var category in Category.filterList) {
+      expect(find.text(category.name), findsAtLeast(1));
+    }
+    final selectCategory = mockTrx2.category;
+    await tester.tap(find.text(selectCategory.name).last);
+    await tester.pump();
+    expect(find.text(mockTrx2.desc), findsOneWidget);
+    expect(find.text(mockTrx1.desc), findsNothing);
   });
 
   testWidgets('Display a list of expenses grouped by day', (tester) async {

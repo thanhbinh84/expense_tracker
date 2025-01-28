@@ -24,14 +24,14 @@ class Trx {
 
   factory Trx.fromJson(Map<String, dynamic> map) {
     return Trx(
-      amount: map[keyAmount],
-      dateTime: utils.convertStringToDate(map[keyDateTime]),
-      desc: map[keyDesc],
-      category: Category.getCategory(map[keyCategoryIndex])
-    );
+        amount: map[keyAmount],
+        dateTime: utils.convertStringToDate(map[keyDateTime]),
+        desc: map[keyDesc],
+        category: Category.getCategory(map[keyCategoryIndex]));
   }
 
   get dateString => utils.convertDateToString(dateTime);
+
   get amountString => '€${amount.toString()}';
 }
 
@@ -42,11 +42,13 @@ class Category {
 
   const Category._internal(this.index, this.name, this.iconData);
 
+  static const all = Category._internal(-1, 'All', Icons.all_inclusive);
   static const food = Category._internal(0, 'Food', Icons.food_bank);
   static const travel = Category._internal(1, 'Travel', Icons.flight);
   static const shopping = Category._internal(2, 'Shopping', Icons.shopping_bag);
 
   static const list = [food, travel, shopping];
+  static const filterList = [all, food, travel, shopping];
 
   static Category getCategory(int index) {
     if (Category.food.index == index) {
@@ -55,6 +57,8 @@ class Category {
       return Category.travel;
     } else if (Category.shopping.index == index) {
       return Category.shopping;
+    } else if (Category.all.index == index) {
+      return Category.all;
     } else {
       throw ArgumentError();
     }

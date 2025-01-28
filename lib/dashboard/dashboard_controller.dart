@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 
 class DashboardController extends BaseController {
   final trxRepository = Get.find<TrxRepository>();
-  final trxList = Rx<List<Trx>>([]);
+  List<Trx> trxList = [];
+  final filteredTrxList = Rx<List<Trx>>([]);
+  final category = Category.all.obs;
 
   @override
   onInit() {
@@ -18,13 +20,26 @@ class DashboardController extends BaseController {
     try {
       loading();
       trxRepository.getTrxList().listen((event) {
-        trxList.value = event;
-        trxList.refresh();
+        trxList = event;
+        filterByCategory();
         success();
       });
     } catch (e) {
       error(error: e.toString());
     }
+  }
+
+  filterByCategory({Category? ca}) {
+    if (ca != null) {
+      category.value = ca;
+      category.refresh();
+    }
+    if (category.value == Category.all) {
+      filteredTrxList.value = trxList;
+    } else {
+      filteredTrxList.value = trxList.where((trx) => trx.category == category.value).toList();
+    }
+    filteredTrxList.refresh();
   }
 
   goToAddTrxScreen() => Get.toNamed(Routes.trx);

@@ -20,21 +20,44 @@ class DashboardScreen extends GetView<DashboardController> {
         _trxListView(context));
   }
 
-  _getAppBarActions(context) {
-    return [
-      IconButton(
-        icon: Icon(
-          Icons.summarize,
-          color: Theme.of(context).primaryColor,
-        ),
-        onPressed: controller.goToSummaryScreen,
-      )
-    ];
+  List<Widget> _getAppBarActions(context) {
+    return [_summaryButton(context), _filterButton(context)];
+  }
+
+  _filterButton(context) {
+    return Obx(() => PopupMenuButton<Category>(
+          shape: const ContinuousRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+          ),
+          initialValue: controller.category.value,
+          onSelected: (category) {
+            controller.filterByCategory(ca: category);
+          },
+          itemBuilder: (context) {
+            return Category.filterList
+                .map((category) => PopupMenuItem(
+                      value: category,
+                      child: Text(category.name),
+                    ))
+                .toList();
+          },
+          icon: const Icon(Icons.filter_list_rounded),
+        ));
+  }
+
+  _summaryButton(context) {
+    return IconButton(
+      icon: Icon(
+        Icons.summarize,
+        color: Theme.of(context).primaryColor,
+      ),
+      onPressed: controller.goToSummaryScreen,
+    );
   }
 
   Widget _trxListView(BuildContext context) {
     return Obx(() {
-      final trxList = controller.trxList.value;
+      final trxList = controller.filteredTrxList.value;
       if (trxList.isEmpty) return _noTrxHistoryView(context);
       return _groupedListView(context, trxList);
     });
