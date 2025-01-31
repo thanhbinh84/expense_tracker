@@ -19,104 +19,24 @@ class TrxScreen extends GetView<TrxController> {
             key: controller.formKey,
             child: Column(
               children: [
-                _descriptionInputView(context),
-                _amountInputView(context),
-                _dateInputView(context),
-                _categoryMenuView(context),
-                _saveButton(context)
+                DescriptionInputView(),
+                AmountInputView(),
+                DateInputView(),
+                CategoryMenuView(),
+                SaveButton()
               ],
             ),
           ),
         ));
   }
+}
 
-  Widget _descriptionInputView(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: TextFormField(
-        key: Key(Txt.description),
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return Txt.pleaseEnterDescription;
-          }
-          return null;
-        },
-        maxLength: 50,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: Txt.description,
-        ),
-        onChanged: (value) => controller.updateTrx(desc: value),
-      ),
-    );
-  }
+class CategoryMenuView extends StatelessWidget {
+  const CategoryMenuView({super.key});
 
-  Widget _amountInputView(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: TextFormField(
-        key: Key(Txt.amount),
-        validator: (value) {
-          final num = double.tryParse(value ?? '') ?? 0;
-          if (num <= 0) {
-            return Txt.pleaseEnterAmount;
-          }
-          return null;
-        },
-        maxLength: 10,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: Txt.amount,
-        ),
-        keyboardType: TextInputType.number,
-        onChanged: (value) => controller.updateTrx(amount: value),
-      ),
-    );
-  }
-
-  Widget _dateInputView(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: TextFormField(
-        key: Key(Txt.date),
-        controller: controller.dateInputController,
-        showCursor: false,
-        readOnly: true,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: Txt.date,
-        ),
-        onTap: () => _showDatePicker(context),
-      ),
-    );
-  }
-
-  _saveButton(BuildContext ctx) {
-    return Padding(
-      padding: const EdgeInsets.all(30),
-      child: ElevatedButton(
-          key: Key(Txt.save),
-          onPressed: () => controller.saveTrx(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(Txt.save),
-          )),
-    );
-  }
-
-  _showDatePicker(context) async {
-    final today = DateTime.now();
-    final firstDate = today.subtract(Duration(days: 365));
-    final DateTime? selectedDate = await showDatePicker(
-        context: context,
-        initialDate: controller.trx.dateTime,
-        firstDate: firstDate,
-        lastDate: today);
-
-    if (selectedDate != null && context.mounted) controller.updateTrx(dateTime: selectedDate);
-  }
-
-  _categoryMenuView(context) {
+  @override
+  Widget build(BuildContext context) {
+    final controller = TrxController.to;
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: DropdownMenu<Category>(
@@ -136,3 +56,114 @@ class TrxScreen extends GetView<TrxController> {
     );
   }
 }
+
+
+class SaveButton extends StatelessWidget {
+  const SaveButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(30),
+      child: ElevatedButton(
+          key: Key(Txt.save),
+          onPressed: () => TrxController.to.saveTrx(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: Text(Txt.save),
+          )),
+    );
+  }
+}
+
+
+class DateInputView extends StatelessWidget {
+  const DateInputView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: TextFormField(
+        key: Key(Txt.date),
+        controller: TrxController.to.dateInputController,
+        showCursor: false,
+        readOnly: true,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: Txt.date,
+        ),
+        onTap: () => _showDatePicker(context),
+      ),
+    );
+  }
+
+  _showDatePicker(context) async {
+    final today = DateTime.now();
+    final firstDate = today.subtract(Duration(days: 365));
+    final DateTime? selectedDate = await showDatePicker(
+        context: context,
+        initialDate: TrxController.to.trx.dateTime,
+        firstDate: firstDate,
+        lastDate: today);
+
+    if (selectedDate != null && context.mounted) TrxController.to.updateTrx(dateTime: selectedDate);
+  }
+}
+
+
+class AmountInputView extends StatelessWidget {
+  const AmountInputView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: TextFormField(
+        key: Key(Txt.amount),
+        validator: (value) {
+          final num = double.tryParse(value ?? '') ?? 0;
+          if (num <= 0) {
+            return Txt.pleaseEnterAmount;
+          }
+          return null;
+        },
+        maxLength: 10,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: Txt.amount,
+        ),
+        keyboardType: TextInputType.number,
+        onChanged: (value) => TrxController.to.updateTrx(amount: value),
+      ),
+    );
+  }
+}
+
+
+class DescriptionInputView extends StatelessWidget {
+  const DescriptionInputView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: TextFormField(
+        key: Key(Txt.description),
+        validator: (value) {
+          if (value == null || value.trim().isEmpty) {
+            return Txt.pleaseEnterDescription;
+          }
+          return null;
+        },
+        maxLength: 50,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: Txt.description,
+        ),
+        onChanged: (value) => TrxController.to.updateTrx(desc: value),
+      ),
+    );
+  }
+}
+

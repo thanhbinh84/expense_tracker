@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import "package:collection/collection.dart";
 
 class SummaryController extends BaseController {
+  static SummaryController get to => Get.find();
   final trxRepository = Get.find<TrxRepository>();
   List<Trx> trxList = [];
   final filteredTrxList = Rx<List<Trx>>([]);

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class TrxController extends BaseController {
+  static TrxController get to => Get.find();
   final trxRepository = Get.find<TrxRepository>();
   Trx trx = Trx();
   final dateInputController = TextEditingController();

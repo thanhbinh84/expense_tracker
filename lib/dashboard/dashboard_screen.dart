@@ -17,7 +17,7 @@ class DashboardScreen extends GetView<DashboardController> {
         appBarActions: _getAppBarActions(context),
         controller: controller,
         floatingActionButton: _floatingActionButton(context),
-        _trxListView(context));
+        TrxListView());
   }
 
   List<Widget> _getAppBarActions(context) {
@@ -55,7 +55,19 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _trxListView(BuildContext context) {
+  _floatingActionButton(BuildContext ctx) {
+    return FloatingActionButton(
+      onPressed: () => controller.goToAddTrxScreen(),
+      child: const Icon(Icons.add),
+    );
+  }
+}
+
+class TrxListView extends GetView<DashboardController> {
+  const TrxListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Obx(() {
       final trxList = controller.filteredTrxList.value;
       if (trxList.isEmpty) return _noTrxHistoryView(context);
@@ -64,18 +76,11 @@ class DashboardScreen extends GetView<DashboardController> {
   }
 
   _noTrxHistoryView(context) => Center(
-          child: Text(
+      child: Text(
         Txt.noTransactionHistory,
         style: Theme.of(context).textTheme.bodyLarge,
         textAlign: TextAlign.center,
       ));
-
-  _floatingActionButton(BuildContext ctx) {
-    return FloatingActionButton(
-      onPressed: () => controller.goToAddTrxScreen(),
-      child: const Icon(Icons.add),
-    );
-  }
 
   _groupedListView(context, List<Trx> trxList) {
     return GroupedListView<Trx, DateTime>(
@@ -109,3 +114,6 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 }
+
+
+
