@@ -1,7 +1,7 @@
 import 'package:expense_tracker/core/controller/base_controller.dart';
 import 'package:expense_tracker/core/model/calendar_filter.dart';
 import 'package:expense_tracker/core/model/trx.dart';
-import 'package:expense_tracker/core/model/trx_by_category.dart';
+import 'package:expense_tracker/core/model/trx_sum_by_category.dart';
 import 'package:expense_tracker/core/repository/trx_repository.dart';
 import 'package:get/get.dart';
 import "package:collection/collection.dart";
@@ -11,7 +11,7 @@ class SummaryController extends BaseController {
   final trxRepository = Get.find<TrxRepository>();
   List<Trx> trxList = [];
   final filteredTrxList = Rx<List<Trx>>([]);
-  final trxByCategoryList = Rx<List<TrxByCategory>>([]);
+  final trxSumByCategoryList = Rx<List<TrxSumByCategory>>([]);
   final calendarFilter = CalendarFilter.week.obs;
 
   @override
@@ -50,14 +50,14 @@ class SummaryController extends BaseController {
   get summary => filteredTrxList.value.fold(0.0, (sum, item) => sum + item.amount);
 
   _updateTrxByCategoryList() {
-    List<TrxByCategory> trxByCategoryList = [];
+    List<TrxSumByCategory> trxByCategoryList = [];
     var group = groupBy(filteredTrxList.value, (Trx obj) => obj.category);
     double totalAllTrx = summary;
     group.forEach((category, list) {
-      trxByCategoryList.add(TrxByCategory(category, list, totalAllTrx));
+      trxByCategoryList.add(TrxSumByCategory(category, list, totalAllTrx));
     });
     trxByCategoryList.sort((a,b) => b.totalAmount.compareTo(a.totalAmount));
-    this.trxByCategoryList.value = trxByCategoryList;
-    this.trxByCategoryList.refresh();
+    this.trxSumByCategoryList.value = trxByCategoryList;
+    this.trxSumByCategoryList.refresh();
   }
 }

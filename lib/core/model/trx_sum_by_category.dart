@@ -1,12 +1,12 @@
 import 'package:expense_tracker/core/model/trx.dart';
 import 'package:expense_tracker/core/util/const/txt.dart';
 
-class TrxByCategory {
+class TrxSumByCategory {
   Category category = Category.food;
   List<Trx> trxList = [];
   double totalAmountAllTrx = 0;
 
-  TrxByCategory(this.category, this.trxList, this.totalAmountAllTrx);
+  TrxSumByCategory(this.category, this.trxList, this.totalAmountAllTrx);
 
   get totalTrxString =>
       '${trxList.length} ${trxList.length == 1 ? Txt.transaction : Txt.transactions}';

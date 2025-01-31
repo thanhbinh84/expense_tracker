@@ -51,9 +51,9 @@ class CategoryListView extends StatelessWidget {
     return Obx(() => ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: SummaryController.to.trxByCategoryList.value.length,
+        itemCount: SummaryController.to.trxSumByCategoryList.value.length,
         itemBuilder: (BuildContext context, int index) {
-          final trx = SummaryController.to.trxByCategoryList.value[index];
+          final trx = SummaryController.to.trxSumByCategoryList.value[index];
           return Card(
             elevation: 8.0,
             margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
