@@ -59,9 +59,6 @@ https://github.com/user-attachments/assets/3c8ea7be-09db-40a0-bf38-d0065392bb48
 
 ## Notes: 
 
-- Use GetX instead of Bloc to save time as GetX can archieve the same but reducing 75% of code and easier to test.
-
 - There is an issue with test coverage tool on Android Studio hence used `lcov` for temporary.
 
-- More test cases should be added for summary feature. 
 
